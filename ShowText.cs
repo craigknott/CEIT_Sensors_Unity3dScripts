@@ -3,8 +3,29 @@ using System.Collections;
 
 public class ShowText : MonoBehaviour {
 
-	public GameObject guiText;
+	new public GameObject guiText = null;
 	private bool showText = false;
+	private ParticleSystem ps;
+
+	void Start()
+	{
+		ps = GetComponent<ParticleSystem>();
+	}
+
+	void Update()
+	{
+		if (float.Parse (guiText.guiText.text) < 21.0) {
+			ps.particleSystem.startColor = Color.blue;
+			if (ps.particleSystem.isStopped)
+				ps.particleSystem.Play();
+		} else if (float.Parse (guiText.guiText.text) > 23.0) {
+			ps.particleSystem.startColor = Color.red;
+			if (ps.particleSystem.isStopped)
+				ps.particleSystem.Play();
+		} else {
+			ps.particleSystem.Stop();
+		}
+	}
 
 	void OnMouseDown()
 	{
